@@ -69,7 +69,6 @@ main {
 
 #contacts_list_container {
     /* background-color: coral; */
-    flex: 1;
     display: flex;
     max-height: 30vh;
     overflow-y: auto;
@@ -78,10 +77,10 @@ main {
 #contacts_list {
     background-color: rgba(125, 145, 156, .8);
     /* background-color: crimson; */
-    flex: 1;
     padding: 0 1rem 1rem 1rem;
     height: fit-content;
     border-radius: 5px;
+    width: 100%;
 }
 
 ul {
@@ -116,7 +115,6 @@ form {
     justify-content: center;
     border-radius: 5px;
     padding: 1rem;
-    width: 100%;
 }
 
 fieldset {
@@ -176,7 +174,6 @@ button {
     background-color: rgba(125, 145, 156, .8);
     padding: 1rem 1rem 1rem 1rem;
     border-radius: 5px;
-    width: 100%;
     height: fit-content;
 }
 
