@@ -17,7 +17,7 @@ function toggleCreateEditForm() {
             contactDetails.style.display = 'none'
         }
 
-        document.getElementById('civility').value = 'homme';
+        document.getElementById('civility').value = 'monsieur';
         document.getElementById('nom_contact').value = '';
         document.getElementById('prenom_contact').value = '';
         document.getElementById('telephone').value = '';
@@ -194,9 +194,10 @@ function displayContacts() {
 
             contacts.forEach(contact => {
                 let li = document.createElement('li');
+                let iconSrc = contact.civilite === 'monsieur' ? './assets/male.svg' : './assets/female.svg';
                 li.innerHTML = `
                     <div class="contact_icon">
-                        <img src="./assets/person.svg" alt="img not found" width="25">
+                        <img src="${iconSrc}" alt="img not found" width="25">
                     </div>
                     <p class="contact_name">${contact.nom} ${contact.prenom}</p>
                 `;
