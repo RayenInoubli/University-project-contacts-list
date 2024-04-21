@@ -1,4 +1,4 @@
-function Contact(civilite, prenom, nom, telephone) {
+function Contact(civilite, nom, prenom, telephone) {
     this.civilite = civilite
     this.prenom = prenom
     this.nom = nom
@@ -183,6 +183,15 @@ function displayContacts() {
             li.textContent = "Aucun contact enregistré";
             listeContacts.appendChild(li);
         } else {
+            // Sort contacts array by nom then prenom
+            contacts.sort((a, b) => {
+                if (a.nom !== b.nom) {
+                    return a.nom.localeCompare(b.nom);
+                } else {
+                    return a.prenom.localeCompare(b.prenom);
+                }
+            });
+
             contacts.forEach(contact => {
                 let li = document.createElement('li');
                 li.innerHTML = `
@@ -286,4 +295,5 @@ deleteAllButton.addEventListener('click', deleteAllContacts);
 
 const deleteOneContactButton = document.getElementById('delete_contact_btn')
 deleteOneContactButton.addEventListener('click', deleteOneContact);
+
 displayContacts();
