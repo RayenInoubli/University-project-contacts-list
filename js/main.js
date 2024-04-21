@@ -69,7 +69,7 @@ function deleteOneContact(event) {
 function findContcat(telephone) {
     let contacts = JSON.parse(localStorage.getItem('contacts')) || [];
     for (let contact of contacts) {
-        if (contact.telephone == telephone) return contact;
+        if (contact.telephone === telephone) return contact;
     }
     return null;
 }
@@ -84,7 +84,8 @@ function createContact(event) {
         const prenom = document.getElementById('prenom_contact').value
         const telephone = document.getElementById('telephone').value
 
-        console.log(civilite, nom, prenom, telephone);
+        const exist = findContcat(telephone);
+        // console.log(civilite, nom, prenom, telephone);
         if (!civilite) {
             alert('civilité est requis!');
             return;
@@ -105,11 +106,15 @@ function createContact(event) {
             alert('Number must be exactly 8 digits long and contain only digits!');
             return;
         }
+        if (exist) {
+            alert('Ce numéro déja existe!');
+            return;
+        }
 
         let contacts = JSON.parse(localStorage.getItem('contacts')) || [];
         const c = new Contact(civilite, nom, prenom, telephone);
         contacts.push(c);
-        console.log('contact: ',c);
+        // console.log('contact: ',c);
         localStorage.setItem('contacts', JSON.stringify(contacts));
 
         alert('Contact added!');
@@ -143,7 +148,7 @@ function displayContactDetails(event) {
 
         const contact = findContcat(telephone);
 
-        console.log('contcat', contact);
+        // console.log('contcat', contact);
 
         let existingContactCard = document.getElementById('contact_card');
         if (existingContactCard) {
@@ -218,7 +223,7 @@ function showEditForm(event) {
         let telephone = event.currentTarget.getAttribute('data-telephone');
         const contact = findContcat(telephone);
 
-        console.log('show edit form', contact);
+        // console.log('show edit form', contact);
         let form = document.getElementById('create_update_contact_form');
         if (form) {
             form.removeEventListener('submit', createContact);
@@ -250,7 +255,8 @@ function updateContactDetails(event) {
         const prenom = document.getElementById('prenom_contact').value;
         const telephone = document.getElementById('telephone').value;
 
-        console.log(civilite, nom, prenom, telephone);
+        const exist = findContcat(telephone);
+        // console.log(civilite, nom, prenom, telephone);
         if (!civilite) {
             alert('civilité est requis!');
             return;
@@ -269,6 +275,10 @@ function updateContactDetails(event) {
         }
         if (!/^\d{8}$/.test(telephone)) {
             alert('Number must be exactly 8 digits long and contain only digits!');
+            return;
+        }
+        if (telephone !== currentTelephone && exist) {
+            alert('Ce numéro déja existe!');
             return;
         }
 
