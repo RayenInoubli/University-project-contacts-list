@@ -22,9 +22,9 @@ function toggleCreateEditForm() {
         document.getElementById('prenom_contact').value = '';
         document.getElementById('telephone').value = '';
 
-        const createForm = document.getElementById('create_update_contact_form');
-        createForm.setAttribute('data-telephone', '');
-        createForm.addEventListener('submit', createContact);
+        const createButton = document.getElementById('submit_btn');
+        createButton.setAttribute('data-telephone', '');
+        createButton.addEventListener('click', createContact);
     } catch (error) {
         alert(error)
     }
@@ -55,15 +55,13 @@ function deleteAllContacts() {
     }
 }
 
-function deleteOneContact(event) {
-    let telephone = event.currentTarget.getAttribute('data-telephone');
+function reloadForm(event) {
+    event.preventDefault();
 
-    if (telephone) {
-        let contacts = JSON.parse(localStorage.getItem('contacts')) || [];
-        let updatedContacts = contacts.filter(c => c.telephone !== telephone);
-        localStorage.setItem('contacts', JSON.stringify(updatedContacts));
-        location.reload();
-    }
+    document.getElementById('civility').value = 'monsieur';
+    document.getElementById('nom_contact').value = '';
+    document.getElementById('prenom_contact').value = '';
+    document.getElementById('telephone').value = '';
 }
 
 function findContcat(telephone) {
@@ -107,7 +105,7 @@ function createContact(event) {
             return;
         }
         if (exist) {
-            alert('Ce numéro déja existe!');
+            alert('Ce numéro déjaaaaaaaaaaaaaaaa existe!');
             return;
         }
 
@@ -223,22 +221,16 @@ function showEditForm(event) {
         let telephone = event.currentTarget.getAttribute('data-telephone');
         const contact = findContcat(telephone);
 
-        // console.log('show edit form', contact);
-        let form = document.getElementById('create_update_contact_form');
-        if (form) {
-            form.removeEventListener('submit', createContact);
-            form.setAttribute('data-telephone', telephone);
-            form.addEventListener('submit', updateContactDetails);
-        }
+        const createButton = document.getElementById('submit_btn');
+        createButton.removeEventListener('click', createContact);
+        createButton.setAttribute('data-telephone', telephone);
+        createButton.addEventListener('click', updateContactDetails);
 
         document.getElementById('civility').value = contact.civilite;
         document.getElementById('nom_contact').value = contact.nom;
         document.getElementById('prenom_contact').value = contact.prenom;
         document.getElementById('telephone').value = contact.telephone;
 
-        let deleteButton = document.getElementById('delete_contact_btn');
-        deleteButton.setAttribute('data-telephone', telephone);
-        // deleteButton.addEventListener('click', deleteOneContact(telephone));
     } catch (error) {
         alert(error);
     }
@@ -278,7 +270,7 @@ function updateContactDetails(event) {
             return;
         }
         if (telephone !== currentTelephone && exist) {
-            alert('Ce numéro déja existe!');
+            alert('Ce numéro déja existeeeeeeeeeeeeeeeeee!');
             return;
         }
 
@@ -305,6 +297,6 @@ const deleteAllButton = document.getElementById('delete_all_btn', deleteAllConta
 deleteAllButton.addEventListener('click', deleteAllContacts);
 
 const deleteOneContactButton = document.getElementById('delete_contact_btn')
-deleteOneContactButton.addEventListener('click', deleteOneContact);
+deleteOneContactButton.addEventListener('click', reloadForm);
 
 displayContacts();
