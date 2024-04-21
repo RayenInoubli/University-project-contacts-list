@@ -5,176 +5,176 @@ function Contact(civilite, nom, prenom, telephone) {
     this.telephone = telephone
 }
 
-function toggleCreateEditForm() {
-    try {
-        const createEditForm = document.getElementById('create_update_form_container')
-        const contactDetails = document.getElementById('view_contact_container')
+// function toggleCreateEditForm() {
+//     try {
+//         const createEditForm = document.getElementById('create_update_form_container')
+//         const contactDetails = document.getElementById('view_contact_container')
 
-        isVisible = createEditForm.style.display == 'block'
+//         isVisible = createEditForm.style.display == 'block'
 
-        if (!isVisible) {
-            createEditForm.style.display = 'block'
-            contactDetails.style.display = 'none'
-        }
+//         if (!isVisible) {
+//             createEditForm.style.display = 'block'
+//             contactDetails.style.display = 'none'
+//         }
 
-        document.getElementById('civility').value = 'monsieur';
-        document.getElementById('nom_contact').value = '';
-        document.getElementById('prenom_contact').value = '';
-        document.getElementById('telephone').value = '';
+//         document.getElementById('civility').value = 'monsieur';
+//         document.getElementById('nom_contact').value = '';
+//         document.getElementById('prenom_contact').value = '';
+//         document.getElementById('telephone').value = '';
 
-        const createButton = document.getElementById('submit_btn');
-        createButton.setAttribute('data-telephone', '');
-        createButton.addEventListener('click', createContact);
-    } catch (error) {
-        alert(error)
-    }
-}
+//         const createButton = document.getElementById('submit_btn');
+//         createButton.setAttribute('data-telephone', '');
+//         createButton.addEventListener('click', createContact);
+//     } catch (error) {
+//         alert(error)
+//     }
+// }
 
-function toggleViewDetails() {
-    try {
-        const contactDetails = document.getElementById('view_contact_container')
-        const createEditForm = document.getElementById('create_update_form_container')
+// function toggleViewDetails() {
+//     try {
+//         const contactDetails = document.getElementById('view_contact_container')
+//         const createEditForm = document.getElementById('create_update_form_container')
 
-        isVisible = contactDetails.style.display == 'block'
+//         isVisible = contactDetails.style.display == 'block'
 
-        if (!isVisible) {
-            contactDetails.style.display = 'block'
-            createEditForm.style.display = 'none'
-        }
-    } catch (error) {
-        alert(error)
-    }
-}
+//         if (!isVisible) {
+//             contactDetails.style.display = 'block'
+//             createEditForm.style.display = 'none'
+//         }
+//     } catch (error) {
+//         alert(error)
+//     }
+// }
 
-function deleteAllContacts() {
-    try {
-        localStorage.removeItem('contacts');
-        location.reload();
-    } catch (error) {
-        alert(error)
-    }
-}
+// function deleteAllContacts() {
+//     try {
+//         localStorage.removeItem('contacts');
+//         location.reload();
+//     } catch (error) {
+//         alert(error)
+//     }
+// }
 
-function reloadForm(event) {
-    event.preventDefault();
+// function reloadForm(event) {
+//     event.preventDefault();
 
-    document.getElementById('civility').value = 'monsieur';
-    document.getElementById('nom_contact').value = '';
-    document.getElementById('prenom_contact').value = '';
-    document.getElementById('telephone').value = '';
-}
+//     document.getElementById('civility').value = 'monsieur';
+//     document.getElementById('nom_contact').value = '';
+//     document.getElementById('prenom_contact').value = '';
+//     document.getElementById('telephone').value = '';
+// }
 
-function findContcat(telephone) {
-    let contacts = JSON.parse(localStorage.getItem('contacts')) || [];
-    for (let contact of contacts) {
-        if (contact.telephone === telephone) return contact;
-    }
-    return null;
-}
+// function findContcat(telephone) {
+//     let contacts = JSON.parse(localStorage.getItem('contacts')) || [];
+//     for (let contact of contacts) {
+//         if (contact.telephone === telephone) return contact;
+//     }
+//     return null;
+// }
 
-function createContact(event) {
-    try {
-        event.preventDefault();
+// function createContact(event) {
+//     try {
+//         event.preventDefault();
 
 
-        const civilite = document.getElementById('civility').value
-        const nom = document.getElementById('nom_contact').value
-        const prenom = document.getElementById('prenom_contact').value
-        const telephone = document.getElementById('telephone').value
+//         const civilite = document.getElementById('civility').value
+//         const nom = document.getElementById('nom_contact').value
+//         const prenom = document.getElementById('prenom_contact').value
+//         const telephone = document.getElementById('telephone').value
 
-        const exist = findContcat(telephone);
-        // console.log(civilite, nom, prenom, telephone);
-        if (!civilite) {
-            alert('civilité est requis!');
-            return;
-        }
-        if (!nom) {
-            alert('nom est requis!');
-            return;
-        }
-        if (!prenom) {
-            alert('prenom est requis!');
-            return;
-        }
-        if (!telephone) {
-            alert('numéro est requis!');
-            return;
-        }
-        if (!/^\d{8}$/.test(telephone)) {
-            alert('Number must be exactly 8 digits long and contain only digits!');
-            return;
-        }
-        if (exist) {
-            alert('Ce numéro déjaaaaaaaaaaaaaaaa existe!');
-            return;
-        }
+//         const exist = findContcat(telephone);
+//         // console.log(civilite, nom, prenom, telephone);
+//         if (!civilite) {
+//             alert('civilité est requis!');
+//             return;
+//         }
+//         if (!nom) {
+//             alert('nom est requis!');
+//             return;
+//         }
+//         if (!prenom) {
+//             alert('prenom est requis!');
+//             return;
+//         }
+//         if (!telephone) {
+//             alert('numéro est requis!');
+//             return;
+//         }
+//         if (!/^\d{8}$/.test(telephone)) {
+//             alert('Number must be exactly 8 digits long and contain only digits!');
+//             return;
+//         }
+//         if (exist) {
+//             alert('Ce numéro déjaaaaaaaaaaaaaaaa existe!');
+//             return;
+//         }
 
-        let contacts = JSON.parse(localStorage.getItem('contacts')) || [];
-        const c = new Contact(civilite, nom, prenom, telephone);
-        contacts.push(c);
-        // console.log('contact: ',c);
-        localStorage.setItem('contacts', JSON.stringify(contacts));
+//         let contacts = JSON.parse(localStorage.getItem('contacts')) || [];
+//         const c = new Contact(civilite, nom, prenom, telephone);
+//         contacts.push(c);
+//         // console.log('contact: ',c);
+//         localStorage.setItem('contacts', JSON.stringify(contacts));
 
-        alert('Contact added!');
+//         alert('Contact added!');
 
-        document.getElementById('civility').value = '';
-        document.getElementById('nom_contact').value = '';
-        document.getElementById('prenom_contact').value = '';
-        document.getElementById('telephone').value = '';
+//         document.getElementById('civility').value = '';
+//         document.getElementById('nom_contact').value = '';
+//         document.getElementById('prenom_contact').value = '';
+//         document.getElementById('telephone').value = '';
 
-        document.getElementById('create_update_form_container').style.display = 'none';
+//         document.getElementById('create_update_form_container').style.display = 'none';
 
-        location.reload();
-    } catch (error) {
-        alert(error)
-    }
-}
+//         location.reload();
+//     } catch (error) {
+//         alert(error)
+//     }
+// }
 
-function displayContactDetails(event) {
-    try {
-        let telephone = event.currentTarget.getAttribute('data-telephone');
-        let viewContactContainer = document.getElementById('view_contact_container');
+// function displayContactDetails(event) {
+//     try {
+//         let telephone = event.currentTarget.getAttribute('data-telephone');
+//         let viewContactContainer = document.getElementById('view_contact_container');
 
-        let allLiElements = document.getElementsByTagName('li');
-        for (let li of allLiElements) {
-            li.classList.remove('selected');
-        }
+//         let allLiElements = document.getElementsByTagName('li');
+//         for (let li of allLiElements) {
+//             li.classList.remove('selected');
+//         }
 
-        event.currentTarget.classList.add('selected');
+//         event.currentTarget.classList.add('selected');
 
-        toggleViewDetails();
+//         toggleViewDetails();
 
-        const contact = findContcat(telephone);
+//         const contact = findContcat(telephone);
 
-        // console.log('contcat', contact);
+//         // console.log('contcat', contact);
 
-        let existingContactCard = document.getElementById('contact_card');
-        if (existingContactCard) {
-            existingContactCard.remove();
-        }
+//         let existingContactCard = document.getElementById('contact_card');
+//         if (existingContactCard) {
+//             existingContactCard.remove();
+//         }
 
-        let detailsDiv = document.createElement('div');
-        detailsDiv.innerHTML = `
-            <h3>Détail du contact</h3>
-            <div id="detail_grp">
-                <b> ${contact.nom} ${contact.prenom} </b>
-                <p>Tél: ${contact.telephone}</p>
-            </div>
-        `;
+//         let detailsDiv = document.createElement('div');
+//         detailsDiv.innerHTML = `
+//             <h3>Détail du contact</h3>
+//             <div id="detail_grp">
+//                 <b> ${contact.nom} ${contact.prenom} </b>
+//                 <p>Tél: ${contact.telephone}</p>
+//             </div>
+//         `;
 
-        let showEditFormButton = document.createElement('button');
-        showEditFormButton.textContent = 'Editer ce contact';
-        showEditFormButton.setAttribute('id', 'edit_btn');
-        showEditFormButton.setAttribute('data-telephone', contact.telephone)
-        showEditFormButton.addEventListener('click', (event) => showEditForm(event))
-        detailsDiv.appendChild(showEditFormButton);
+//         let showEditFormButton = document.createElement('button');
+//         showEditFormButton.textContent = 'Editer ce contact';
+//         showEditFormButton.setAttribute('id', 'edit_btn');
+//         showEditFormButton.setAttribute('data-telephone', contact.telephone)
+//         showEditFormButton.addEventListener('click', (event) => showEditForm(event))
+//         detailsDiv.appendChild(showEditFormButton);
 
-        detailsDiv.setAttribute('id', 'contact_card')
-        viewContactContainer.appendChild(detailsDiv);
-    } catch (error) {
-        alert(error);
-    }
-}
+//         detailsDiv.setAttribute('id', 'contact_card')
+//         viewContactContainer.appendChild(detailsDiv);
+//     } catch (error) {
+//         alert(error);
+//     }
+// }
 
 function displayContacts() {
     try {
@@ -215,88 +215,88 @@ function displayContacts() {
 }
 
 
-function showEditForm(event) {
-    try {
-        toggleCreateEditForm();
-        let telephone = event.currentTarget.getAttribute('data-telephone');
-        const contact = findContcat(telephone);
+// function showEditForm(event) {
+//     try {
+//         toggleCreateEditForm();
+//         let telephone = event.currentTarget.getAttribute('data-telephone');
+//         const contact = findContcat(telephone);
 
-        const createButton = document.getElementById('submit_btn');
-        createButton.removeEventListener('click', createContact);
-        createButton.setAttribute('data-telephone', telephone);
-        createButton.addEventListener('click', updateContactDetails);
+//         const createButton = document.getElementById('submit_btn');
+//         createButton.removeEventListener('click', createContact);
+//         createButton.setAttribute('data-telephone', telephone);
+//         createButton.addEventListener('click', updateContactDetails);
 
-        document.getElementById('civility').value = contact.civilite;
-        document.getElementById('nom_contact').value = contact.nom;
-        document.getElementById('prenom_contact').value = contact.prenom;
-        document.getElementById('telephone').value = contact.telephone;
+//         document.getElementById('civility').value = contact.civilite;
+//         document.getElementById('nom_contact').value = contact.nom;
+//         document.getElementById('prenom_contact').value = contact.prenom;
+//         document.getElementById('telephone').value = contact.telephone;
 
-    } catch (error) {
-        alert(error);
-    }
-}
+//     } catch (error) {
+//         alert(error);
+//     }
+// }
 
-function updateContactDetails(event) {
-    try {
-        event.preventDefault();
+// function updateContactDetails(event) {
+//     try {
+//         event.preventDefault();
 
-        let currentTelephone = event.currentTarget.getAttribute('data-telephone');
+//         let currentTelephone = event.currentTarget.getAttribute('data-telephone');
 
-        const civilite = document.getElementById('civility').value;
-        const nom = document.getElementById('nom_contact').value;
-        const prenom = document.getElementById('prenom_contact').value;
-        const telephone = document.getElementById('telephone').value;
+//         const civilite = document.getElementById('civility').value;
+//         const nom = document.getElementById('nom_contact').value;
+//         const prenom = document.getElementById('prenom_contact').value;
+//         const telephone = document.getElementById('telephone').value;
 
-        const exist = findContcat(telephone);
-        // console.log(civilite, nom, prenom, telephone);
-        if (!civilite) {
-            alert('civilité est requis!');
-            return;
-        }
-        if (!nom) {
-            alert('nom est requis!');
-            return;
-        }
-        if (!prenom) {
-            alert('prenom est requis!');
-            return;
-        }
-        if (!telephone) {
-            alert('numéro est requis!');
-            return;
-        }
-        if (!/^\d{8}$/.test(telephone)) {
-            alert('Number must be exactly 8 digits long and contain only digits!');
-            return;
-        }
-        if (telephone !== currentTelephone && exist) {
-            alert('Ce numéro déja existeeeeeeeeeeeeeeeeee!');
-            return;
-        }
+//         const exist = findContcat(telephone);
+//         // console.log(civilite, nom, prenom, telephone);
+//         if (!civilite) {
+//             alert('civilité est requis!');
+//             return;
+//         }
+//         if (!nom) {
+//             alert('nom est requis!');
+//             return;
+//         }
+//         if (!prenom) {
+//             alert('prenom est requis!');
+//             return;
+//         }
+//         if (!telephone) {
+//             alert('numéro est requis!');
+//             return;
+//         }
+//         if (!/^\d{8}$/.test(telephone)) {
+//             alert('Number must be exactly 8 digits long and contain only digits!');
+//             return;
+//         }
+//         if (telephone !== currentTelephone && exist) {
+//             alert('Ce numéro déja existeeeeeeeeeeeeeeeeee!');
+//             return;
+//         }
 
-        let contacts = JSON.parse(localStorage.getItem('contacts')) || [];
-        let updatedContacts = contacts.map(contact => {
-            if (contact.telephone === currentTelephone) {
-                return { civilite, nom, prenom, telephone };
-            }
-            return contact;
-        });
+//         let contacts = JSON.parse(localStorage.getItem('contacts')) || [];
+//         let updatedContacts = contacts.map(contact => {
+//             if (contact.telephone === currentTelephone) {
+//                 return { civilite, nom, prenom, telephone };
+//             }
+//             return contact;
+//         });
 
-        localStorage.setItem('contacts', JSON.stringify(updatedContacts));
-        alert('Contact updated!');
-        location.reload();
-    } catch (error) {
-        alert(error);
-    }
-}
+//         localStorage.setItem('contacts', JSON.stringify(updatedContacts));
+//         alert('Contact updated!');
+//         location.reload();
+//     } catch (error) {
+//         alert(error);
+//     }
+// }
 
-const addButton = document.getElementById('add_btn');
-addButton.addEventListener('click', toggleCreateEditForm);
+// const addButton = document.getElementById('add_btn');
+// addButton.addEventListener('click', toggleCreateEditForm);
 
-const deleteAllButton = document.getElementById('delete_all_btn', deleteAllContacts);
-deleteAllButton.addEventListener('click', deleteAllContacts);
+// const deleteAllButton = document.getElementById('delete_all_btn');
+// deleteAllButton.addEventListener('click', deleteAllContacts);
 
-const deleteOneContactButton = document.getElementById('delete_contact_btn')
-deleteOneContactButton.addEventListener('click', reloadForm);
+// const deleteOneContactButton = document.getElementById('delete_contact_btn')
+// deleteOneContactButton.addEventListener('click', reloadForm);
 
 displayContacts();
