@@ -23,6 +23,7 @@ function toggleCreateEditForm() {
         document.getElementById('telephone').value = '';
 
         const createButton = document.getElementById('submit_btn');
+        createButton.removeEventListener('click', updateContactDetails);
         createButton.setAttribute('data-telephone', '');
         createButton.addEventListener('click', createContact);
     } catch (error) {
