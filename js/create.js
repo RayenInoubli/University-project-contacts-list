@@ -5,17 +5,13 @@ function Contact(civilite, nom, prenom, telephone) {
     this.telephone = telephone
 }
 
-function toggleCreateEditForm() {
+function toggleCreateForm() {
     try {
         const createEditForm = document.getElementById('create_update_form_container')
         const contactDetails = document.getElementById('view_contact_container')
 
-        isVisible = createEditForm.style.display == 'block'
-
-        if (!isVisible) {
-            createEditForm.style.display = 'block'
-            contactDetails.style.display = 'none'
-        }
+        createEditForm.style.display = 'block'
+        contactDetails.style.display = 'none'
 
         document.getElementById('civility').value = 'monsieur';
         document.getElementById('nom_contact').value = '';
@@ -97,4 +93,4 @@ function createContact(event) {
 }
 
 const addButton = document.getElementById('add_btn');
-addButton.addEventListener('click', toggleCreateEditForm);
+addButton.addEventListener('click', toggleCreateForm);

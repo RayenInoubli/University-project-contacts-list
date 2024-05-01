@@ -1,15 +1,11 @@
-function toggleCreateEditForm() {
+function toggleEditForm() {
     try {
         const createEditForm = document.getElementById('create_update_form_container')
         const contactDetails = document.getElementById('view_contact_container')
 
-        isVisible = createEditForm.style.display == 'block'
-
-        if (!isVisible) {
-            createEditForm.style.display = 'block'
-            contactDetails.style.display = 'none'
-        }
-
+        createEditForm.style.display = 'block'
+        contactDetails.style.display = 'none'
+        
         document.getElementById('civility').value = 'monsieur';
         document.getElementById('nom_contact').value = '';
         document.getElementById('prenom_contact').value = '';
@@ -29,27 +25,6 @@ function findContcat(telephone) {
         if (contact.telephone === telephone) return contact;
     }
     return null;
-}
-
-function showEditForm(event) {
-    try {
-        toggleCreateEditForm();
-        let telephone = event.currentTarget.getAttribute('data-telephone');
-        const contact = findContcat(telephone);
-
-        const createButton = document.getElementById('submit_btn');
-        createButton.removeEventListener('click', createContact);
-        createButton.setAttribute('data-telephone', telephone);
-        createButton.addEventListener('click', updateContactDetails);
-
-        document.getElementById('civility').value = contact.civilite;
-        document.getElementById('nom_contact').value = contact.nom;
-        document.getElementById('prenom_contact').value = contact.prenom;
-        document.getElementById('telephone').value = contact.telephone;
-
-    } catch (error) {
-        alert(error);
-    }
 }
 
 function updateContactDetails(event) {
@@ -101,6 +76,27 @@ function updateContactDetails(event) {
         localStorage.setItem('contacts', JSON.stringify(updatedContacts));
         alert('Contact updated!');
         location.reload();
+    } catch (error) {
+        alert(error);
+    }
+}
+
+function showEditForm(event) {
+    try {
+        toggleEditForm();
+        let telephone = event.currentTarget.getAttribute('data-telephone');
+        const contact = findContcat(telephone);
+
+        const createButton = document.getElementById('submit_btn');
+        createButton.removeEventListener('click', createContact);
+        createButton.setAttribute('data-telephone', telephone);
+        createButton.addEventListener('click', updateContactDetails);
+
+        document.getElementById('civility').value = contact.civilite;
+        document.getElementById('nom_contact').value = contact.nom;
+        document.getElementById('prenom_contact').value = contact.prenom;
+        document.getElementById('telephone').value = contact.telephone;
+
     } catch (error) {
         alert(error);
     }

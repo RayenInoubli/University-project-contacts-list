@@ -3,12 +3,8 @@ function toggleViewDetails() {
         const contactDetails = document.getElementById('view_contact_container')
         const createEditForm = document.getElementById('create_update_form_container')
 
-        isVisible = contactDetails.style.display == 'block'
-
-        if (!isVisible) {
-            contactDetails.style.display = 'block'
-            createEditForm.style.display = 'none'
-        }
+        contactDetails.style.display = 'block'
+        createEditForm.style.display = 'none'
     } catch (error) {
         alert(error)
     }
@@ -70,7 +66,6 @@ function displayContacts() {
             li.textContent = "Aucun contact enregistré";
             listeContacts.appendChild(li);
         } else {
-            // Sort contacts array by nom then prenom
             contacts.sort((a, b) => {
                 if (a.nom !== b.nom) {
                     return a.nom.localeCompare(b.nom);
