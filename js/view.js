@@ -67,6 +67,11 @@ function displayContacts() {
             listeContacts.appendChild(li);
         } else {
             contacts.sort((a, b) => {
+
+                if (a.civilite !== b.civilite) {
+                    return a.civilite === 'madame' || a.civilite ==='mademoiselle' ? -1 : 1;
+                }
+
                 if (a.nom !== b.nom) {
                     return a.nom.localeCompare(b.nom);
                 } else {
